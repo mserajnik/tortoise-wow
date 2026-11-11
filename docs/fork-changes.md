@@ -1,9 +1,18 @@
 # Changes compared to upstream
 
 The table below lists every change of this fork against
-[Tortoise-WoW's `main` branch](https://github.com/tortoise-wow/tortoise-wow/tree/main).
-When a later upstream change supersedes one of them, it gets cleanly reverted
-and its row removed, so the table always reflects the current diff.
+[Tortoise-WoW's `main` branch](https://github.com/tortoise-wow/tortoise-wow/tree/main),
+newest first. When a later upstream change supersedes one of them, it gets
+cleanly reverted and its row removed, so the table always reflects the current
+diff.
 
-| Commit | What | Why |
-| ------ | ---- | --- |
+| Commit                                                                                                 | What                                                                                                              | Why                                                                                                                                                                                 |
+| ------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`2947095`](https://github.com/mserajnik/tortoise-wow/commit/294709544d6bfa980c990dc4fa5d3dc2eddd0a74) | Moves the July 4th fireworks to 4 July                                                                            | The event started on 4 June, the date VMaNGOS added it with                                                                                                                         |
+| [`7556fab`](https://github.com/mserajnik/tortoise-wow/commit/7556fab68ec32804845744f50aecdd0bf8a1188f) | Keeps 51 recurring events running through 2037                                                                    | Their end dates had passed or pass before 2037, after which an event never runs again; as VMaNGOS did                                                                               |
+| [`5193ae1`](https://github.com/mserajnik/tortoise-wow/commit/5193ae1a9fff348f0b41fc641499881d53fa9023) | Sets 3284 class trainer costs and levels, among them the rogue prices, and adds Grizzie the Enforcer's Plate Mail | Upstream migrations left these values different from Capybara Paradise                                                                                                              |
+| [`c99b1c9`](https://github.com/mserajnik/tortoise-wow/commit/c99b1c9f43564f4bcf4a0024b4921c34a35b3508) | Yearly events start on their calendar date                                                                        | The leap-day count made most yearly events start one day late; upstream pull request [#613](https://github.com/tortoise-wow/tortoise-wow/pull/613)                                  |
+| [`6112297`](https://github.com/mserajnik/tortoise-wow/commit/61122975be7d810f7132af55a3ca976d2b606b28) | Elder Krasheen and Horsekeeper Geringt train again, and five stable masters offer stabling                        | Three zone migrations removed or never set these flags and lists; the values are those of Capybara Paradise                                                                         |
+| [`62a2c1f`](https://github.com/mserajnik/tortoise-wow/commit/62a2c1fed593c5280badddaa46982218f02848a7) | Twinkie Boomstick teaches the hunter spells, five class trainers train again, and Mayten Boomrifle teaches Mail   | The trainer rebuild and two zone migrations lost these lists and flags; the values are those of Capybara Paradise                                                                   |
+| [`0bc12ab`](https://github.com/mserajnik/tortoise-wow/commit/0bc12abb6d96cc00940c7ad52f35a3f9423a0492) | Restores the trainer levels of 48 spells (646 rows) and sets Reshift's cost to 3g 40s                             | The upstream trainer rebuild changed these levels; the values are those of Capybara Paradise                                                                                        |
+| [`f12f087`](https://github.com/mserajnik/tortoise-wow/commit/f12f087acbefc3305f3378d772379dedbe025d2f) | Custom pet families such as the Young Arctic Fox learn the higher ranks of their family abilities                 | The trainable skill line was hardcoded for Vanilla families; ported from VMaNGOS and merged upstream into `1181dev` ([#665](https://github.com/tortoise-wow/tortoise-wow/pull/665)) |
