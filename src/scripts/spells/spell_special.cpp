@@ -432,11 +432,22 @@ struct spell_silithyst : public AuraScript
     }
 };
 
+struct spell_controlling_steam_tonk_spell : public SpellScript
+{
+    void OnInit(Spell* spell) override
+    {
+        // The possess check fails for a player with a pet, which would leave
+        // the player rooted at the Tonk Control Console.
+        if (Player* player = spell->m_caster->ToPlayer())
+            player->UnsummonPetTemporaryIfAny();
+    }
+};
+
 struct spell_controlling_steam_tonk : public AuraScript
 {
     void OnAfterApply(Aura* aura, bool apply) override
     {
-        if (apply)
+        if (apply || aura->GetEffIndex() != EFFECT_INDEX_0)
             return;
 
         Unit* target = aura->GetTarget();
@@ -453,6 +464,19 @@ struct spell_controlling_steam_tonk : public AuraScript
             console->SetGoState(GO_STATE_READY);
             console->SetLootState(GO_READY);
             console->RemoveFlag(GAMEOBJECT_FLAGS, GO_FLAG_IN_USE);
+        }
+
+        // Resummon the pet on the next update: this also runs while the player
+        // leaves the map, which deletes a pet that is present at that moment.
+        if (Player* player = caster->ToPlayer())
+        {
+            auto resummonPet = [player]()
+            {
+                player->ResummonPetTemporaryUnSummonedIfAny();
+            };
+
+            player->m_Events.AddEvent(new LambdaBasicEvent<decltype(resummonPet)>(std::move(resummonPet)),
+                player->m_Events.CalculateTime(0));
         }
     }
 };
@@ -772,7 +796,7 @@ void AddSC_special_spell_scripts()
     RegisterAuraScript("spell_shadowmeld", &GetAuraScript<spell_shadowmeld>);
     RegisterAuraScript("spell_stoneform", &GetAuraScript<spell_stoneform>);
     RegisterAuraScript("spell_silithyst", &GetAuraScript<spell_silithyst>);
-    RegisterAuraScript("spell_controlling_steam_tonk", &GetAuraScript<spell_controlling_steam_tonk>);
+    RegisterSpellAndAuraScript("spell_controlling_steam_tonk", &GetSpellScript<spell_controlling_steam_tonk_spell>, &GetAuraScript<spell_controlling_steam_tonk>);
     RegisterSpellScript("spell_battleground_banner_open", &GetSpellScript<spell_battleground_banner_open>);
     RegisterSpellScript("spell_decoy_place_loot", &GetSpellScript<spell_decoy_place_loot>);
     RegisterSpellScript("spell_forbidden_capital_restriction", &GetSpellScript<spell_forbidden_capital_restriction>);
