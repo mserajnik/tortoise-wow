@@ -1,0 +1,13 @@
+{
+  "includes": ["docs/fork-changes.md"], // Do not reformat upstream's documents.
+  "markdown": {
+    "hardBreakKind": "doubleSpace",
+    "lineWidth": 79,
+    "strongKind": "underscores",
+    "textWrap": "always",
+    "wrapCodeSpans": false
+  },
+  "plugins": [
+    "https://plugins.dprint.dev/markdown-0.29.0.wasm"
+  ]
+}

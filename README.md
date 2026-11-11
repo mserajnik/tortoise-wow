@@ -1,5 +1,31 @@
-
 # Tortoise-WoW
+
+> [!NOTE]
+> This is a personal fork of
+> [Tortoise-WoW](https://github.com/tortoise-wow/tortoise-wow). Its main goal
+> is playability, where upstream aims to re-create Turtle WoW 1.18.1
+> accurately. The fork follows upstream, but it also fixes bugs without full
+> certainty that the fix matches the original, as well as bugs the original had
+> itself when they hurt playability. If a later upstream change supersedes one
+> of these fixes, it gets cleanly reverted here.
+>
+> Everything is thoroughly researched before it gets implemented. The main
+> sources are Turtle WoW successor projects for data (assumed to run on, or at
+> least be based on, the original 1.18.1 server code), other Tortoise-WoW forks
+> for ideas, and VMaNGOS and CMaNGOS for Vanilla behavior. Vanilla problems
+> only get fixed where they noticeably hurt gameplay; otherwise the fork tries
+> to stay close to Turtle WoW, which was balanced around its own data, even
+> where evidence and sniffs show that data to be inaccurate.
+>
+> __Maintainer's note__: most commits, including their code, comments, and
+> documentation, are LLM-written to keep this fork maintainable alongside my
+> other projects, so beware if you are allergic to LLM writing.
+>
+> All differences to upstream are listed in
+> [`docs/fork-changes.md`](docs/fork-changes.md). The original upstream README
+> follows below.
+
+---
 
 This is an unofficial, community-driven restoration of the 1.18.1 patch of Turtle-WoW, with some additions to allow for customization.  
 Do not represent this project, or anyone using it, as the original creators.  
